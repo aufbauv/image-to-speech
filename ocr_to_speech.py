@@ -1,8 +1,6 @@
-
 import cv2
 from PIL import Image
 import pytesseract
-import pyttsx3
 
 camera=cv2.VideoCapture(0)
 
@@ -22,8 +20,5 @@ def tesseract():
     pytesseract.tesseract_cmd=path_to_tesseract
     text=pytesseract.image_to_string(pil_image)
     print(text[:-1])
-    text_speech= pyttsx3.init()
-    text_speech.say(text)
-    text_speech.runAndWait()
-tesseract()
 
+tesseract()
