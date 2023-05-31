@@ -1,6 +1,7 @@
 import cv2
 from PIL import Image
-import pytesseract
+from pytesseract import pytesseract
+import pyttsx3
 
 camera=cv2.VideoCapture(0)
 
@@ -14,11 +15,14 @@ camera.release()
 cv2.destroyAllWindows()
 
 def tesseract():
-    path_to_tesseract=r"C:\Program Files\Tesseract-OCR"
-    image = cv2.imread('test1.jpg')
-    pil_image = Image.fromarray(image)
+    path_to_tesseract=r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    imagepath ='test1.jpg'
     pytesseract.tesseract_cmd=path_to_tesseract
-    text=pytesseract.image_to_string(pil_image)
+    text=pytesseract.image_to_string(Image.open(imagepath))
     print(text[:-1])
 
+    text_speech = pyttsx3.init()
+    text_speech.say(text)
+    text_speech.runAndWait()
 tesseract()
+
